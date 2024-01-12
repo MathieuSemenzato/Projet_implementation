@@ -26,8 +26,11 @@ void FFT_to_img(){
 
 void init_FFT(){
     int i;
-    for(i=0; i<500; i++){
+    for(i=0; i<250; i++){
         FFT[i] = i;//rand()%1000;
+    }
+    for(i=250; i<500; i++){
+        FFT[i] = 500-i;//rand()%1000;
     }
 }
 
@@ -85,7 +88,7 @@ void print_image(){
     int i,j;
     for(i=0; i<480; i++){
         for(j=0; j<640; j++){
-            if(Image[i][j]==0xFFF)printf("■");
+            if(Image[i][j]==0xFFF)printf("▉");
             else printf(" ");
         }
         printf("\n");
@@ -94,18 +97,12 @@ void print_image(){
 
 int main() {
     srand(time(NULL));
+    init_FFT();
     while(1){
-        
-        init_FFT();
-        
         FFT_to_img();
-        
         reset_background();
-        
         init_background();
-        
         draw_graph();
-        
         //print_image();
     }
     return 0;
